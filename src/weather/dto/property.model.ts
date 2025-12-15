@@ -28,5 +28,5 @@ export class Property {
   long!: number;
 
   @Field(() => GraphQLJSONObject)
-  weatherData!: any; // "current" z Weatherstack
+  weatherData!: any;
 }

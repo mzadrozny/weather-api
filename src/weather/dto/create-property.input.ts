@@ -9,8 +9,8 @@ export class CreatePropertyInput {
   street!: string;
 
   @Field()
-  state!: string; // np. AZ
+  state!: string;
 
   @Field()
-  zipCode!: string; // 5 cyfr
+  zipCode!: string;
 }
