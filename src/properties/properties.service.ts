@@ -25,9 +25,9 @@ export class PropertiesService {
   async createProperty(input: CreatePropertyInput) {
     this.validateUS(input);
 
-    const key = process.env.PropertiesSTACK_ACCESS_KEY;
+    const key = process.env.WEATHERSTACK_ACCESS_KEY;
     if (!key)
-      throw new BadRequestException('Missing PropertiesSTACK_ACCESS_KEY in .env');
+      throw new BadRequestException('Missing WEATHERSTACK_ACCESS_KEY in .env');
 
     const query = `${input.street}, ${input.city}, ${input.state} ${input.zipCode}, USA`;
     const wx = await this.Properties.getCurrentProperties(query, key);
