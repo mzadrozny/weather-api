@@ -1,19 +1,13 @@
 import { Args, Mutation, Query, Resolver, ID } from '@nestjs/graphql';
-import { PropertiesService } from './properties.service';
+import { WeatherService } from './weather.service';
 import { Property } from './dto/property.model';
 import { CreatePropertyInput } from './dto/create-property.input';
-import { PropertiesFilterInput } from './dto/properties-filter.input';
-import { PropertiesSortInput } from './dto/properties-sort.input';
+import { WeatherFilterInput } from './dto/properties-filter.input';
+import { WeatherSortInput } from './dto/properties-sort.input';
 
 @Resolver(() => Property)
-export class PropertiesResolver {
-  constructor(private readonly service: PropertiesService) {}
-
-  // zostaw ping, bo jest fajny do sanity check
-  @Query(() => String)
-  ping() {
-    return 'pong';
-  }
+export class WeatherResolver {
+  constructor(private readonly service: WeatherService) {}
 
   @Query(() => Property)
   property(@Args('id', { type: () => ID }) id: string) {
@@ -22,10 +16,10 @@ export class PropertiesResolver {
 
   @Query(() => [Property])
   properties(
-    @Args('filter', { nullable: true }) filter?: PropertiesFilterInput,
-    @Args('sort', { nullable: true }) sort?: PropertiesSortInput,
+    @Args('filter', { nullable: true }) filter?: WeatherFilterInput,
+    @Args('sort', { nullable: true }) sort?: WeatherSortInput,
   ) {
-    return this.service.listProperties(filter, sort);
+    return this.service.listWeather(filter, sort);
   }
 
   @Mutation(() => Property)

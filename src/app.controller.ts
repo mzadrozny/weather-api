@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
@@ -7,7 +8,7 @@ export class AppController {
     return {
       graphql: 'http://localhost:3000/graphql',
       examples: {
-        listProperties: `
+        listWeather: `
 query {
   properties {
     id

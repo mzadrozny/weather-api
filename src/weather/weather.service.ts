@@ -3,11 +3,11 @@ import { CreatePropertyInput } from './dto/create-property.input';
 import { WeatherstackClient } from './weatherstack.client';
 import { PrismaService } from 'prisma/prisma.service';
 import { NotFoundException } from '@nestjs/common';
-import { PropertiesFilterInput } from './dto/properties-filter.input';
-import { PropertiesSortInput } from './dto/properties-sort.input';
+import { WeatherFilterInput } from './dto/properties-filter.input';
+import { WeatherSortInput } from './dto/properties-sort.input';
 
 @Injectable()
-export class PropertiesService {
+export class WeatherService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly weather: WeatherstackClient,
@@ -51,9 +51,9 @@ export class PropertiesService {
     return p;
   }
 
-  async listProperties(
-    filter?: PropertiesFilterInput,
-    sort?: PropertiesSortInput,
+  async listWeather(
+    filter?: WeatherFilterInput,
+    sort?: WeatherSortInput,
   ) {
     return this.prisma.property.findMany({
       where: {

@@ -1,4 +1,4 @@
-# Properties GraphQL API
+# Weather GraphQL API
 
 Backend application for managing property records, built with **Node.js**, **TypeScript**, **NestJS**, **GraphQL** and **Prisma**.
 
