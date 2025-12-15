@@ -3,8 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from 'prisma/prisma.module';
 import { GraphQLModule } from '@nestjs/graphql';
-import { WeatherModule } from './weather/weather.module';
 import { ApolloDriver } from '@nestjs/apollo';
+import { PropertiesModule } from './properties/property.module';
 
 @Module({
     imports: [
@@ -14,7 +14,7 @@ import { ApolloDriver } from '@nestjs/apollo';
       autoSchemaFile: true,
       playground: true,
     }),
-    WeatherModule,
+    PropertiesModule,
   ],
   controllers: [AppController],
 })

@@ -1,16 +1,16 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreatePropertyInput } from './dto/create-property.input';
-import { WeatherstackClient } from './weatherstack.client';
 import { PrismaService } from 'prisma/prisma.service';
 import { NotFoundException } from '@nestjs/common';
-import { WeatherFilterInput } from './dto/properties-filter.input';
-import { WeatherSortInput } from './dto/properties-sort.input';
+import { PropertiesFilterInput } from './dto/properties-filter.input';
+import { PropertiesSortInput } from './dto/properties-sort.input';
+import { PropertiesstackClient } from './weatherstack.client';
 
 @Injectable()
-export class WeatherService {
+export class PropertiesService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly weather: WeatherstackClient,
+    private readonly Properties: PropertiesstackClient,
   ) {}
 
   private validateUS(input: CreatePropertyInput) {
@@ -25,12 +25,12 @@ export class WeatherService {
   async createProperty(input: CreatePropertyInput) {
     this.validateUS(input);
 
-    const key = process.env.WEATHERSTACK_ACCESS_KEY;
+    const key = process.env.PropertiesSTACK_ACCESS_KEY;
     if (!key)
-      throw new BadRequestException('Missing WEATHERSTACK_ACCESS_KEY in .env');
+      throw new BadRequestException('Missing PropertiesSTACK_ACCESS_KEY in .env');
 
     const query = `${input.street}, ${input.city}, ${input.state} ${input.zipCode}, USA`;
-    const wx = await this.weather.getCurrentWeather(query, key);
+    const wx = await this.Properties.getCurrentProperties(query, key);
 
     return this.prisma.property.create({
       data: {
@@ -40,7 +40,7 @@ export class WeatherService {
         zipCode: input.zipCode,
         lat: wx.lat,
         long: wx.long,
-        weatherData: wx.weatherData,
+        weatherData: wx.PropertiesData,
       },
     });
   }
@@ -51,9 +51,9 @@ export class WeatherService {
     return p;
   }
 
-  async listWeather(
-    filter?: WeatherFilterInput,
-    sort?: WeatherSortInput,
+  async listProperties(
+    filter?: PropertiesFilterInput,
+    sort?: PropertiesSortInput,
   ) {
     return this.prisma.property.findMany({
       where: {

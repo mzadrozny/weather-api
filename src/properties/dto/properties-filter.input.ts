@@ -1,7 +1,7 @@
 import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
-export class WeatherFilterInput {
+export class PropertiesFilterInput {
   @Field({ nullable: true })
   city?: string;
 

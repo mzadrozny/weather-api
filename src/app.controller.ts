@@ -8,7 +8,7 @@ export class AppController {
     return {
       graphql: 'http://localhost:3000/graphql',
       examples: {
-        listWeather: `
+        listProperties: `
 query {
   properties {
     id
@@ -37,7 +37,7 @@ query {
     id
     city
     street
-    weatherData
+    PropertiesData
   }
 }
         `,
